@@ -1,0 +1,123 @@
+.bg-header{
+    background-color: #001d49;
+}
+
+.bg-darke{
+    background-color: #000000;
+}
+
+.h-15{
+    height: 15%;
+}
+
+.w-15{
+    width: 15%;
+}
+
+.w-35{
+    width: 35%;
+}
+
+.w-65{
+    width: 65%;
+}
+
+.h-35{
+    height: 35%;
+}
+
+.h-30{
+    height: 30%;
+}
+
+.h-55{
+    height: 55%;
+}
+.bg-footer{
+    background-color: #0099ff;
+}
+
+
+.h-90{
+    height: 90%;
+}
+
+.h-85{
+    height: 85%;
+}
+
+.h-10{
+    height: 10%;
+}
+
+.w-35{
+    width: 35%;
+}
+
+.w-85{
+    width: 85%;
+}
+
+
+.bg-gra{
+    background: linear-gradient(315deg,#000004,#000114,#001a49);
+    background-size: 120% 120%;
+    animation: gradient-animation 6s ease infinite;
+}
+
+.h-90{
+    height: 90%;
+}
+
+.h-85{
+    height: 85%;
+}
+
+.h-10{
+    height: 10%;
+}
+
+.w-35{
+    width: 35%;
+}
+
+.w-85{
+    width: 85%;
+}
+
+  
+@keyframes gradient-animation {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+}
+
+.bg-cont{
+    background-color: #0099ff;
+}
+
+.bg-form{
+    background-color: #001d49;
+}
+
+.w-20{
+    width: 20%;
+  }
+  
+  .w-80{
+    width: 80%;
+  }
+  
+  .w-95{
+    width: 95%;
+  }
+
+.vh-65{
+    height: 65vh;
+}

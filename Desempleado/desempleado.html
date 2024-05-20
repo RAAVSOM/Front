@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="initial-scale=1, width=device-width" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  <link rel="stylesheet" href="/style.css" />
+  <title>Desempleado</title>
+</head>
+
+<body>
+  <div class="d-flex align-items-start vh-100 vw-100 bg-dark">
+    <div class="nav flex-column nav-pills p-4 h-100 w-20 border-end border-info" id="v-pills-tab" role="tablist"
+      aria-orientation="vertical">
+      <h2 class="text-light text-center fs-4 mb-5">Menu Principal</h2>
+      <button class="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home"
+        type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">Buscar Empleo</button>
+      <button class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile"
+        type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">Perfil</button>
+      <button class="nav-link" id="v-pills-post-tab" data-bs-toggle="pill" data-bs-target="#v-pills-post" type="button"
+        role="tab" aria-controls="v-pills-post" aria-selected="false">Postulaciones</button>
+      <button class="nav-link mb-5" id="v-pills-con-tab" data-bs-toggle="pill" data-bs-target="#v-pills-con"
+        type="button" role="tab" aria-controls="v-pills-con" aria-selected="false">Contrataciones</button>
+      <button class="btn btn-danger" onclick="cerrarSesion()">Cerrar Sesion</button>
+    </div>
+    <div class="tab-content h-100 w-100 overflow-auto" id="v-pills-tabContent">
+      <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab"
+        tabindex="0">
+        <nav class="navbar p-4 bg-cont">
+          <div>
+            <h1 class="text-light fs-4">Buscar Empleo</h1>
+            <div class="container-fluid px-0 align-content-center">
+              <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-info" type="submit">Search</button>
+              </form>
+            </div>
+          </div>
+          <h1 class="text-light">JobOffer</h1>
+        </nav>
+        <div class="row justify-content-center gx-0">
+          <table class="table table-dark table-hover w-95 px-0 overflow-y-auto">
+            <thead>
+              <tr>
+                <th scope="col">Vacantes</th>
+                <th scope="col">Titulo</th>
+                <th scope="col">Cargo</th>
+                <th scope="col">Empresa</th>
+                <th scope="col">Salario</th>
+              </tr>
+            </thead>
+            <tbody id="Vacantes">
+              
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+      <div class="tab-pane fade h-100 w-100 overflow-auto" id="v-pills-profile" role="tabpanel"
+        aria-labelledby="v-pills-profile-tab" tabindex="0">
+        <form class="row mx-3 gx-0 h-100 gap-3 justify-content-center">
+          <h1 class="text-light mt-5 ">Perfil de Usuario</h1>
+          <div class="mb-3 fs-4 text-light">
+            <label for="exampleInputEmail1" class="form-label">Correo</label>
+            <input type="email" class="form-control form-control-sm" id="Correo"
+              aria-describedby="emailHelp">
+          </div>
+          <div class="mb-3 fs-4 text-light">
+            <label for="exampleInputEmail1" class="form-label">Nombre Completo</label>
+            <input type="text" class="form-control form-control-sm" id="Nombre"
+              aria-describedby="emailHelp">
+          </div>
+          <div class="mb-3 fs-4 text-light">
+            <label for="exampleInputEmail1" class="form-label">Apellidos</label>
+            <input type="text" class="form-control form-control-sm" id="Apellido"
+              aria-describedby="emailHelp">
+          </div>
+          <div class="mb-3 fs-4 text-light">
+            <label for="exampleInputEmail1" class="form-label">Ciudad de Residencia</label>
+            <input type="text" class="form-control form-control-sm" id="Ciudad"
+              aria-describedby="emailHelp">
+          </div>
+          <div class="mb-3 fs-4 text-light">
+            <label for="exampleInputEmail1" class="form-label">Telefono</label>
+            <input type="number" class="form-control form-control-sm" id="Telefono"
+              aria-describedby="emailHelp">
+          </div>
+          <div class="mb-3 fs-4 text-light">
+            <label for="exampleInputEmail1" class="form-label">Genero</label>
+            <select class="form-select" aria-label="Default select example" id="Genero">
+              <option selected>Genero</option>
+              <option value="1">Femenino</option>
+              <option value="2">Masculino</option>
+            </select>
+          </div>
+          <div class="mb-3 fs-4 text-light">
+            <label for="exampleInputEmail1" class="form-label">Numero de Cedula</label>
+            <input type="number" class="form-control form-control-sm" id="Numero"
+              aria-describedby="emailHelp">
+          </div>
+          <button class="btn btn-primary w-50 mb-5" data-bs-toggle="modal" data-bs-target="#perModal"
+            type="button">Editar perfil profesional</button>
+          <button class="btn btn-warning w-50" type="button" onclick="editarInformacion()">Guardar Informacion</button>
+        </form>
+      </div>
+      <div class="tab-pane fade h-100 w-100 overflow-auto" id="v-pills-post" role="tabpanel"
+        aria-labelledby="v-pills-post-tab" tabindex="0">
+        <nav class="navbar p-4 bg-cont">
+          <div>
+            <h1 class="text-light fs-4">Postulaciones</h1>
+            <div class="container-fluid px-0 align-content-center">
+              <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-info" type="submit">Search</button>
+              </form>
+            </div>
+          </div>
+          <h1 class="text-light">JobOffer</h1>
+        </nav>
+        <div class="row justify-content-center gx-0">
+          <table class="table table-dark table-hover w-95 px-0 overflow-y-auto">
+            <thead>
+              <tr>
+                <th scope="col">Vacantes</th>
+                <th scope="col">Titulo</th>
+                <th scope="col">Cargo</th>
+                <th scope="col">Empresa</th>
+                <th scope="col">Salario</th>
+              </tr>
+            </thead>
+            <tbody id="Postulaciones">
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="tab-pane fade h-100 w-100 overflow-auto" id="v-pills-con" role="tabpanel"
+        aria-labelledby="v-pills-con-tab" tabindex="0">
+        <nav class="navbar p-4 bg-cont">
+          <div>
+            <h1 class="text-light fs-4">Contratos</h1>
+            <div class="container-fluid px-0 align-content-center">
+              <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-info" type="submit">Search</button>
+              </form>
+            </div>
+          </div>
+          <h1 class="text-light">JobOffer</h1>
+        </nav>
+        <div class="row justify-content-center gx-0">
+          <table class="table table-dark table-hover w-95 px-0 overflow-y-auto">
+            <thead>
+              <tr>
+                <th scope="col">Vacantes</th>
+                <th scope="col">Titulo</th>
+                <th scope="col">Cargo</th>
+                <th scope="col">Empresa</th>
+                <th scope="col">Salario</th>
+              </tr>
+            </thead>
+            <tbody id="Contratos">
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Modal Vacante -->
+  <div class="modal fade modal-lg" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="Titulo">Titulo Vacante</h1>
+        </div>
+        <div class="modal-body">
+          <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                  aria-expanded="true" aria-controls="collapseOne">
+                  Descripcion de La vacante
+                </button>
+              </h2>
+              <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                data-bs-parent="#accordionExample">
+                <div class="accordion-body" id="Descripcion">
+                  
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  Informacion detallada de la vacante
+                </button>
+              </h2>
+              <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                data-bs-parent="#accordionExample">
+                <div class="accordion-body" id="Info">
+                  
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingThree">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" id="Empresa">
+                  Empresa:
+                </button>
+              </h2>
+              <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                data-bs-parent="#accordionExample">
+                <div class="accordion-body" id="InfoE">
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" onclick="ejecutarPostulacion()">Postularse</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- Modal Postulacion o Contratacion -->
+  <div class="modal fade modal-lg" id="postModal" tabindex="-1" aria-labelledby="postModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Titulo Vacante</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                  aria-expanded="true" aria-controls="collapseOne">
+                  Descripcion de La vacante
+                </button>
+              </h2>
+              <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse
+                  plugin adds the appropriate classes that we use to style each element. These classes control the
+                  overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this
+                  with custom CSS or overriding our default variables. It's also worth noting that just about any HTML
+                  can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  Informacion detallada de la vacante
+                </button>
+              </h2>
+              <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse
+                  plugin adds the appropriate classes that we use to style each element. These classes control the
+                  overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this
+                  with custom CSS or overriding our default variables. It's also worth noting that just about any HTML
+                  can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingThree">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                  Empresa:
+                </button>
+              </h2>
+              <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse
+                  plugin adds the appropriate classes that we use to style each element. These classes control the
+                  overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this
+                  with custom CSS or overriding our default variables. It's also worth noting that just about any HTML
+                  can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Perfil Profesional -->
+  <div class="modal fade modal-xl" id="perModal" tabindex="-1" aria-labelledby="perModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Perfil Profesional</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body row justify-content-between gap-3 gx-0">
+          <div class="col list-group text-center" id="Titulos">
+            <li class="list-group-item active">Titulos</li>
+
+          </div>
+          <div class="col list-group text-center" id="Certificados">
+            <li class="list-group-item active">Certificados</li>
+            
+          </div>
+          <div class="col list-group text-center">
+            <table class="table table-hover">
+              <label class="fw-bold">Historias Laborales</label>
+              <thead>
+                <tr>
+                  <th scope="col">Lugar</th>
+                  <th scope="col">Cargo</th>
+                  <th scope="col">Año</th>
+                </tr>
+              </thead>
+              <tbody id="Historias">
+                
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div class="row justify-content-between gap-5 gx-0">
+            <button type="button" class="col btn btn-info" data-bs-toggle="modal" data-bs-target="#aggTModal">Agregar Titulo</button>
+            <button type="button" class="col btn btn-info" data-bs-toggle="modal" data-bs-target="#aggCModal">Agregar Certificado</button>
+            <button type="button" class="col btn btn-info" data-bs-toggle="modal" data-bs-target="#aggHModal">Agregar Historia Laboral</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modales para editar -->
+  <div class="modal fade modal-xl" id="infoTModal" tabindex="-1" aria-labelledby="perModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Titulo</h1>
+        </div>
+        <div class="modal-body row gx-0 justify-content-center">
+          <h3 class="fw-bold fs-5 text-center">Informacion a Cambiar</h3>
+          <input type="text" class="form-control form-control-sm w-75 mb-4" id="inputTituloE">
+          <div class="row justify-content-between gap-4 gx-0">
+            <button type="button" class="col btn btn-danger" onclick="eliminarTitulo()" data-bs-toggle="modal" data-bs-target="#perModal">Eliminar</button>
+            <button type="button" class="col btn btn-warning" onclick="editarTitulo()" data-bs-toggle="modal" data-bs-target="#perModal">Editar</button>
+            <button type="button" class="col btn btn-info" data-bs-toggle="modal" data-bs-target="#perModal">Cancelar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade modal-xl" id="infoCModal" tabindex="-1" aria-labelledby="perModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Certificado</h1>
+        </div>
+        <div class="modal-body row gx-0 justify-content-center">
+          <h3 class="fw-bold fs-5 text-center">Informacion a Cambiar</h3>
+          <input type="text" class="form-control form-control-sm w-75 mb-4" id="inputCertificadoE">
+          <div class="row justify-content-between gap-4 gx-0">
+            <button type="button" class="col btn btn-danger" onclick="eliminarCertificado()" data-bs-toggle="modal" data-bs-target="#perModal">Eliminar</button>
+            <button type="button" class="col btn btn-warning" onclick="editarCertificado()" data-bs-toggle="modal" data-bs-target="#perModal">Editar</button>
+            <button type="button" class="col btn btn-info" data-bs-toggle="modal" data-bs-target="#perModal">Cancelar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade modal-xl" id="infoHModal" tabindex="-1" aria-labelledby="infoHModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Informacion</h1>
+        </div>
+        <div class="modal-body row gx-0 justify-content-center">
+          <h3 class="fw-bold fs-5 text-center">Lugar</h3>
+          <input type="text" class="form-control form-control-sm w-75 mb-4" id="inputLugarE">
+          <h3 class="fw-bold fs-5 text-center">Cargo</h3>
+          <input type="text" class="form-control form-control-sm w-75 mb-4" id="inputCargoE">
+          <h3 class="fw-bold fs-5 text-center">Año</h3>
+          <input type="text" class="form-control form-control-sm w-75 mb-4" id="inputAñoE">
+          <div class="row justify-content-between gap-4 gx-0">
+            <button type="button" class="col btn btn-danger" onclick="eliminarHistoria()" data-bs-toggle="modal" data-bs-target="#perModal">Eliminar</button>
+            <button type="button" class="col btn btn-warning" onclick="editarHistoria()" data-bs-toggle="modal" data-bs-target="#perModal">Editar</button>
+            <button type="button" class="col btn btn-info" data-bs-toggle="modal" data-bs-target="#perModal">Cancelar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modales para agregar -->
+  <div class="modal fade modal-xl" id="aggTModal" tabindex="-1" aria-labelledby="aggModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body row gx-0 justify-content-center">
+          <h3 class="fw-bold fs-5 text-center">Agregar Titulo</h3>
+          <input type="text" class="form-control form-control-sm w-75 mb-4" id="inputTitulo">
+          <div class="row justify-content-between gap-4 gx-0">
+            <button type="button" class="col btn btn-info" onclick="agregarTitulo()" data-bs-toggle="modal" data-bs-target="#perModal">Agregar</button>
+            <button type="button" class="col btn btn-secondary" data-bs-toggle="modal" data-bs-target="#perModal">Cancelar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade modal-xl" id="aggCModal" tabindex="-1" aria-labelledby="aggCModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body row gx-0 justify-content-center">
+          <h3 class="fw-bold fs-5 text-center">Agregar Certificado</h3>
+          <input type="text" class="form-control form-control-sm w-75 mb-4" id="inputCertificado">
+          <div class="row justify-content-between gap-4 gx-0">
+            <button type="button" class="col btn btn-info" onclick="agregarCertificado()" data-bs-toggle="modal" data-bs-target="#perModal">Agregar</button>
+            <button type="button" class="col btn btn-secondary" data-bs-toggle="modal" data-bs-target="#perModal">Cancelar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade modal-xl" id="aggHModal" tabindex="-1" aria-labelledby="aggHModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar Historia Laboral</h1>
+        </div>
+        <div class="modal-body row gx-0 justify-content-center">
+          <h3 class="fw-bold fs-5 text-center">Lugar</h3>
+          <input type="text" class="form-control form-control-sm w-75 mb-4" id="inputLugar">
+          <h3 class="fw-bold fs-5 text-center">Cargo</h3>
+          <input type="text" class="form-control form-control-sm w-75 mb-4" id="inputCargo">
+          <h3 class="fw-bold fs-5 text-center">Año</h3>
+          <input type="text" class="form-control form-control-sm w-75 mb-4" id="inputAño">
+          <div class="row justify-content-between gap-4 gx-0">
+            <button type="button" class="col btn btn-info" onclick="agregarHistoria()" data-bs-toggle="modal" data-bs-target="#perModal">Agregar</button>
+            <button type="button" class="col btn btn-secondary" data-bs-toggle="modal" data-bs-target="#perModal">Cancelar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+    crossorigin="anonymous"></script>
+  <script src="/Desempleado/ApiDesempleado.js"></script>
+</body>
+
+</html>

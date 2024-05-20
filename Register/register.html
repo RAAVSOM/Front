@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <div class="vh-100 vw-100 row justify-content-center align-items-center bg-gra gx-0">
+        <div class="h-90 w-35 bg-cont overflow-hidden">
+            <a href="http://localhost:5501/" class="p-3 text-center text-reset text-decoration-none">
+                <h1 class="m-0">JobOffer</h1>
+            </a>
+            <div class="h-85 w-100 bg-form pt-3">
+                <form id="Form" class="text-light row justify-content-center gx-0 h-75">
+                    <label class="fs-1 text-center">Buscar Trabajo</label>
+                    <div class="w-85 mt-4">
+                        <label class="fs-5">Correo</label>
+                        <input type="text" class="form-control" id="Correo" placeholder="Coloque correo" />
+                    </div>
+                    <div class="w-85 mt-4">
+                        <label class="fs-5">Contraseña</label>
+                        <input type="password" class="form-control" id="Clave" placeholder="Coloque contraseña" />
+                    </div>
+                    <div class="w-85 mt-4">
+                        <label class="fs-5">Confirmar Contraseña</label>
+                        <input type="password" class="form-control" id="Claveconfirm" placeholder="Coloque contraseña" />
+                    </div>
+                    <div class="w-85 mt-4 h-10 gap-4 row">
+                        <a href="http://localhost:5501/Login/login.html" class="col text-reset text-decoration-none">Ya
+                            tienes una cuenta?</a>
+                        <button type="button" class="col btn btn-dark w-35 h-100" onclick="ejecutarRegister()">Crear
+                            Cuenta</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/ApiLogin-Register.js"></script>
+</body>
+
+</html>
