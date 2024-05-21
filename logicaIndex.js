@@ -1,5 +1,5 @@
 function irLogin(){
-    window.location.href = "http://localhost:5501/Login/login.html";
+    window.location.href = "/Login/login.html";
 }
 
 

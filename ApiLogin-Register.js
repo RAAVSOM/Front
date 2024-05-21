@@ -13,23 +13,26 @@ function login(done) {
         })
     }).then(response => response.json())
         .then(data => {
+            console.log(data);
             done(data)
         });
 }
 
 function ejecutarLogin() {
     login(data => {
+        console.log(data);
         if (data.tipo_usuario != 'Usuario o Contraseña Incorrectas') {
             if (data.tipo_usuario == 'desempleado') {
                 loginDesempleado(data =>{
+                    console.log(data);
                     sessionStorage.setItem("usuario", JSON.stringify(data));
                 }, data)
-                window.location.href = "http://localhost:5501/Desempleado/desempleado.html";
+                window.location.href = "/Desempleado/desempleado.html";
             } else {
                 loginContratista(data =>{
                     sessionStorage.setItem("usuario", JSON.stringify(data));
                 }, data)
-                window.location.href = "http://localhost:5501/Contratista/contratista.html";
+                window.location.href = "/Contratista/contratista.html";
             }
         } else {
             const aviso = document.createRange().createContextualFragment(/*html*/`
@@ -44,10 +47,7 @@ function ejecutarLogin() {
 
 function ejecutarRegister() {
     register(data => {
-        loginDesempleado(data =>{
-            sessionStorage.setItem("usuario", JSON.stringify(data));
-        }, data)
-        window.location.href = "http://localhost:5501/Desempleado/desempleado.html";
+        window.location.href = "/Login/login.html";
     });
 }
 
@@ -67,7 +67,10 @@ function register(done) {
                 usuario: {
                     correo: correo,
                     clave: clave,
-                    tipo_usuario: 'desempleado'
+                    tipo_usuario: 'desempleado',
+                    persona:{
+
+                    },
                 }
             })
         }).then(response => response.json())
@@ -85,14 +88,9 @@ function register(done) {
 }
 
 function loginDesempleado(done, usuario) {
-    const result = fetch('http://localhost:9998/api', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(usuario)
-    }).then(response => response.json())
+    const result = fetch('http://localhost:9998/api/desempleadoLog/'+usuario.id_usuario).then(response => response.json())
         .then(data => {
+            console.log(data);
             done(data)
         });
 }

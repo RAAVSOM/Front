@@ -14,8 +14,8 @@ function actualizarDatos(done){
     });
 }
 
-actualizarDatos(data =>{
-    console.log(data);
+actualizarDatos(dato =>{
+    data = dato;
 })
 
 
@@ -28,17 +28,19 @@ function getPostulaciones(done){
         },
         body: JSON.stringify(data)
     }).then(response => response.json())
-    .then(data =>{
-        console.log(data);
-    });
+        .then(data => {
+            done(data)
+        });
 } 
 
 function executeGetPostulaciones(){
     getPostulaciones(data =>{
+        console.log(data);
         data.forEach(vacante => {
             let tablaVacantes = document.getElementById("Postulaciones");
+            console.log(tablaVacantes);
             tablaVacantes.innerHTML += `
-                <tr data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="verVacante(event.target)" title="${vacante.id_vacante}">
+                <tr data-bs-toggle="modal" data-bs-target="#postModal" onclick="verVacanteV(event.target)" title="${vacante.id_vacante}">
                     <th scope="row">${vacante.disponibles}</th>
                     <td>${vacante.titulo}</td>
                     <td>${vacante.lugar}</td>
@@ -70,7 +72,7 @@ function executeGetContratos(){
         data.forEach(vacante => {
             let tablaVacantes = document.getElementById("Contratos");
             tablaVacantes.innerHTML += `
-                <tr data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="verVacante(event.target)" title="${vacante.id_vacante}">
+                <tr data-bs-toggle="modal" data-bs-target="#postModal" onclick="verVacanteV(event.target)" title="${vacante.id_vacante}">
                     <th scope="row">${vacante.disponibles}</th>
                     <td>${vacante.titulo}</td>
                     <td>${vacante.lugar}</td>
@@ -145,6 +147,37 @@ function verVacante(obj){
     }, obj)
 }
 
+function verVacanteV(obj){
+    getVacante(data =>{
+        let titulo = document.getElementById("TituloV");
+        titulo.textContent = data.titulo;
+
+        let desc = document.getElementById("DescripcionV");
+        desc.textContent = '';
+        desc.innerHTML = `<p>${data.descripcion}</p>`;
+
+        let info = document.getElementById("InfoV");
+        info.textContent = '';
+        info.innerHTML = `<p>salario: ${data.salario}</p>
+        <p>jornada: ${data.jornada}</p>
+        <p>tiempo: ${data.tiempo}</p>
+        <p>lugar: ${data.lugar}</p>
+        <p>experiencia requerida en meses: ${data.experiencia}</p>
+        <p>vacantes disponibles: ${data.disponibles}</p>`;
+
+        let empresa = document.getElementById("EmpresaV");
+        empresa.textContent = 'Empresa: '+ data.empresa.nombre_empresa;
+
+        let infoE = document.getElementById("InfoEV");
+        infoE.textContent = '';
+        infoE.innerHTML = `<p>${data.empresa.descripcion_empresa}</p>
+        <p>porcentaje_contratacion: ${data.empresa.porcentaje_contratacion}</p>
+        <p>calificacion: ${data.empresa.calificacion}</p>
+        <p>lugar: ${data.empresa.lugar}</p>
+        <p>link: <a href="#">${data.empresa.link}</a></p>`;
+    }, obj)
+}
+
 function colocarInfo(){
     let correo = document.getElementById("Correo");
     correo.value = data.usuario.correo;
@@ -155,8 +188,8 @@ function colocarInfo(){
     let genero = document.getElementById("Genero");
     let numero = document.getElementById("Numero");
     if(data.usuario.persona != null){
-        nombre.value = data.usuario.persona.nombre;
-        apellido.value = data.usuario.persona.apellido;
+        nombre.value = data.usuario.persona.nombre_persona;
+        apellido.value = data.usuario.persona.apellido_persona;
         ciudad.value = data.usuario.persona.ciudad;
         telefono.value = data.usuario.persona.telefono;
         if(data.usuario.persona.genero){
@@ -365,24 +398,24 @@ function editarInformacion(){
     let genero = document.getElementById("Genero");
     let numero = document.getElementById("Numero");
     if(data.usuario.persona == null){
-        data.usuario.correo = correo.value;
         data.usuario.persona = {
-            nombre: nombre.value,
-            apellido: apellido.value,
-            ciudad: ciudad.value,
-            telefono: telefono.value,
-            genero: "",
-            numero: numero.value
+            
         }
+        data.usuario.correo = correo.value;
+        data.usuario.persona.nombre_persona = nombre.value;
+        data.usuario.persona.apellido_persona = apellido.value;
+        data.usuario.persona.ciudad = ciudad.value;
+        data.usuario.persona.telefono = telefono.value;
         if(genero.value == 1){
             data.usuario.persona.genero = true;
         }else{
             data.usuario.persona.genero = false;
         }
+        data.usuario.persona.numero = numero.value; 
     }else{
         data.usuario.correo = correo.value;
-        data.usuario.persona.nombre = nombre.value;
-        data.usuario.persona.apellido = apellido.value;
+        data.usuario.persona.nombre_persona = nombre.value;
+        data.usuario.persona.apellido_persona = apellido.value;
         data.usuario.persona.ciudad = ciudad.value;
         data.usuario.persona.telefono = telefono.value;
         if(genero.value == 1){
@@ -392,9 +425,7 @@ function editarInformacion(){
         }
         data.usuario.persona.numero = numero.value; 
     }
-    editarInfoEnBd(data =>{
-        console.log(data);
-    });
+    console.log(data);
 }
 
 function editarInfoEnBd(done){
@@ -410,25 +441,49 @@ function editarInfoEnBd(done){
         });
 }
 
-function postularse(done){
+function postularse(){
     const result = fetch('http://localhost:9998/api/vacante/postularse/'+data.id_desempleado+'/'+vacanteSeleccionadaId, {
         method: 'POST'
     }).then(response => response.json())
-        .then(data => {
-            done(data)
-        });
+        .then();
 }
 
 function ejecutarPostulacion(){
-    postularse(data =>{
-        console.log(data);
-    });
-    executeGetPostulaciones();
-    actualizarDatos(data =>{
-        console.log(data);
-    })
+    try {
+        if(data.usuario.correo == '' ||
+            data.usuario.persona.nombre_persona == null ||
+            data.usuario.persona.apellido_persona == '' ||
+            data.usuario.persona.ciudad == '' ||
+            data.usuario.persona.telefono == null ||
+            data.usuario.persona.genero == null ||
+            data.usuario.persona.numero == null){
+            const aviso = document.createRange().createContextualFragment(/*html*/`
+                <label class="fs-5 pt-2 text-center">complete su informacion personal</label>
+            `);
+
+            const main = document.getElementById("Mensaje");
+            main.append(aviso);
+        }else{
+            postularse();
+            let main = document.getElementById("Mensaje");
+            main.innerHTML = `<label class="fs-5 pt-2 text-center">Su postulacion fue exitosa</label>`;
+            actualizarDatos(dato =>{
+                data = dato;
+            })
+            executeGetPostulaciones(); 
+        }
+    } catch (error) {
+        const aviso = document.createRange().createContextualFragment(/*html*/`
+            <label class="fs-5 pt-2 text-center">complete su informacion personal</label>
+        `);
+
+        const main = document.getElementById("Mensaje");
+        main.append(aviso);
+    }
+    
 }
 
 function cerrarSesion() {
-    window.location.href = "http://localhost:5501/Login/login.html";
+    window.location.href = "/Login/login.html";
+    sessionStorage.clear();
 }
