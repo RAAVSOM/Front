@@ -27,12 +27,12 @@ function ejecutarLogin() {
                     console.log(data);
                     sessionStorage.setItem("usuario", JSON.stringify(data));
                 }, data)
-                window.location.href = "Desempleado/desempleado.html";
+                window.location.href = "/Desempleado/desempleado.html";
             } else {
                 loginContratista(data =>{
                     sessionStorage.setItem("usuario", JSON.stringify(data));
                 }, data)
-                window.location.href = "Contratista/contratista.html";
+                window.location.href = "/Contratista/contratista.html";
             }
         } else {
             const aviso = document.createRange().createContextualFragment(/*html*/`
@@ -47,7 +47,7 @@ function ejecutarLogin() {
 
 function ejecutarRegister() {
     register(data => {
-        window.location.href = "Login/login.html";
+        window.location.href = "/Login/login.html";
     });
 }
 

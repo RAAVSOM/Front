@@ -485,5 +485,5 @@ function ejecutarPostulacion(){
 
 function cerrarSesion() {
     sessionStorage.clear();
-    window.location.href = "Login/login.html";
+    window.location.href = "/Login/login.html";
 }
