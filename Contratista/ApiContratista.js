@@ -179,5 +179,5 @@ function crearVacante(){
 }
 
 function cerrarSesion() {
-    window.location.href = "/Login/login.html";
+    window.location.href = "Login/login.html";
 }
