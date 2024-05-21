@@ -174,10 +174,46 @@ function contratar(){
     })
 }
 
+function generarVacante(done){
+    let titulo = document.getElementById("TituloV").value;
+    let descripcion =  document.getElementById("DesV").value;
+    let salario =  document.getElementById("SalV").value;
+    let jornada =  document.getElementById("JorV").value;
+    let tiempo =  document.getElementById("TiempoV").value;
+    let lugar =  document.getElementById("LugarV").value;
+    let experiencia =  document.getElementById("ExpV").value;
+    let disponibles =  document.getElementById("disV").value;
+    vacante = {
+        titulo : titulo,
+        descripcio: descripcion,
+        salario: salario,
+        jornada: jornada,
+        tiempo: tiempo,
+        lugar: lugar,
+        experiencia: experiencia,
+        disponibles: disponibles,
+        empresa: data.empresa,
+        contratista: data
+    }
+    const result = fetch('http://localhost:9998/api/vacante', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(vacante)
+    }).then(result => result.json()).then(data =>{
+        done(data)
+        console.log(data);
+    });
+}
+
 function crearVacante(){
-    
+    generarVacante(data =>{
+        console.log(data);
+    })
 }
 
 function cerrarSesion() {
+    sessionStorage.clear();
     window.location.href = "/Login/login.html";
 }

@@ -60,45 +60,45 @@
                     <h1 class="text-light mt-5">Crear Vacante</h1>
                     <div class="mb-3 fs-4 text-light">
                         <label for="exampleInputEmail1" class="form-label">Titulo</label>
-                        <input type="text" class="form-control form-control-sm" id="exampleInputEmail1"
+                        <input id="TituloV" type="text" class="form-control form-control-sm" id="exampleInputEmail1"
                             aria-describedby="emailHelp">
                     </div>
                     <div class="mb-3 fs-4 text-light">
                         <label for="exampleInputEmail1" class="form-label">Descripcion</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="6"></textarea>
+                        <textarea id="DesV" class="form-control" id="exampleFormControlTextarea1" rows="6"></textarea>
                     </div>
                     <div class="mb-3 fs-4 text-light">
                         <label for="exampleInputEmail1" class="form-label">Salario</label>
-                        <input type="number" class="form-control form-control-sm" id="exampleInputEmail1"
+                        <input id="SalV" type="number" class="form-control form-control-sm" id="exampleInputEmail1"
                             aria-describedby="emailHelp">
                     </div>
                     <div class="mb-3 fs-4 text-light">
                         <label for="exampleInputEmail1" class="form-label">Jornada</label>
-                        <input type="text" class="form-control form-control-sm" id="exampleInputEmail1"
+                        <input id="JorV" type="text" class="form-control form-control-sm" id="exampleInputEmail1"
                             aria-describedby="emailHelp">
                     </div>
                     <div class="mb-3 fs-4 text-light">
                         <label for="exampleInputEmail1" class="form-label">Intensidad Horaria</label>
-                        <input type="text" class="form-control form-control-sm" id="exampleInputEmail1"
+                        <input id="TiempoV" type="text" class="form-control form-control-sm" id="exampleInputEmail1"
                             aria-describedby="emailHelp">
                     </div>
                     <div class="mb-3 fs-4 text-light">
                         <label for="exampleInputEmail1" class="form-label">Lugar</label>
-                        <input type="text" class="form-control form-control-sm" id="exampleInputEmail1"
+                        <input id="LugarV" type="text" class="form-control form-control-sm" id="exampleInputEmail1"
                             aria-describedby="emailHelp">
                     </div>
                     <div class="mb-3 fs-4 text-light">
                         <label for="exampleInputEmail1" class="form-label">Experiencia requerida en meses</label>
-                        <input type="number" class="form-control form-control-sm" id="exampleInputEmail1"
+                        <input id="ExpV" type="number" class="form-control form-control-sm" id="exampleInputEmail1"
                             aria-describedby="emailHelp">
                     </div>
                     <div class="mb-3 fs-4 text-light">
                         <label for="exampleInputEmail1" class="form-label">Contratos Disponibles</label>
-                        <input type="number" class="form-control form-control-sm" id="exampleInputEmail1"
+                        <input id="disV" type="number" class="form-control form-control-sm" id="exampleInputEmail1"
                             aria-describedby="emailHelp">
                     </div>
 
-                    <button class="btn btn-primary w-50" type="button">Crear Vacante</button>
+                    <button class="btn btn-primary w-50" type="button" onclick="crearVacante()">Crear Vacante</button>
                 </form>
             </div>
             <div class="tab-pane fade h-100 w-100 overflow-auto" id="v-pills-con" role="tabpanel"

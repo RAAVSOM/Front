@@ -96,14 +96,10 @@ function loginDesempleado(done, usuario) {
 }
 
 function loginContratista(done, usuario) {
-    const result = fetch('http://localhost:9998/api/contratista', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(usuario)
-    }).then(response => response.json())
+    console.log(usuario.id_usuario);
+    const result = fetch('http://localhost:9998/api/contratista/contratistaLog/'+usuario.id_usuario).then(response => response.json())
         .then(data => {
+            console.log(data);
             done(data)
         });
 }
